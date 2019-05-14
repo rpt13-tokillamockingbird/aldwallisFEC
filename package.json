@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "mongoose": "^5.5.6",
@@ -18,6 +19,11 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "nodemon": "^1.19.0"
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "nodemon": "^1.19.0",
+    "webpack": "^4.31.0"
   }
 }

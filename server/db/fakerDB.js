@@ -49,12 +49,19 @@ let hundredRecords = () => {
 let Record = mongoose.model('Record', productSchema);
 
 //Instance of 50 records.
-let fifty = hundredRecords()
+let hundred = hundredRecords()
 
 //Can insert many records at once.
-Record.insertMany(fifty, (err) => {
+
+Record.deleteMany({}, (err) => {
   if (err) {
     throw err;
+  } else {
+    Record.insertMany(hundred, (err) => {
+      if (err) {
+        throw err;
+      }
+    })
   }
 })
 
