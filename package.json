@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node server/db/fakerDB.js",
-    "server": "nodemon server/express/express.js"
+    "server": "nodemon server/express/express.js",
+    "reactDev": "webpack -d --watch"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +24,9 @@
     "@babel/core": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.0-beta.0",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.0",
-    "webpack": "^4.31.0"
+    "webpack": "^2.2.1",
+    "webpack-cli": "^3.3.2"
   }
 }

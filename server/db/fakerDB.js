@@ -33,15 +33,12 @@ let product = () => {
   return {productName, brand, price, blurbUnderPrice, materials, moreBrand, department, itemNumber}
 }
 
-//Creating batch of 50 records to be sent.
-// ----------- Need to figure out how many records we want inserted.
 
 let hundredRecords = () => {
   let array = [];
   while (array.length < 100) {
     array.push(product())
   }
-  console.log(array.length)
   return array
 }
 
