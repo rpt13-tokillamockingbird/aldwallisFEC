@@ -29,7 +29,7 @@ let product = () => {
   let blurbUnderPrice = `${faker.commerce.productAdjective()} ${faker.lorem.sentence()}`
   //Details & Care
     let materials = faker.commerce.productMaterial()
-    let moreBrand = `By ${brand}; imported` //could do a math rand to flip between imported and domestic.
+    let moreBrand = `By ${brand}` //could do a math rand to flip between imported and domestic.
     let department = `____ Shoes.` //again do math rand to pick between men and women.
     //let itemNumber = `Item #${faker.random.number()}` //Or do whatever current id we are at in db?
     let itemNumber = 0
@@ -40,8 +40,18 @@ let product = () => {
 let hundredRecords = () => {
   let array = [];
   let count = 0
+  // let randomizer = Math.random()
   while (array.length < 10) {
     let rec = product()
+    let x = (Math.random())
+    if (count % 2 == 0) {
+      let org = rec.moreBrand;
+      rec.moreBrand = org + '; imported'
+      rec.department = 'Men\'s shoes'
+    } else{
+      //let org = rec.moreBrand;
+      rec.department = `Women's shoes`
+    }
     rec.itemNumber = count
     array.push(rec)
     count++
