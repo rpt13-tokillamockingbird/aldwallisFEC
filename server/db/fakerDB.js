@@ -11,6 +11,7 @@ db.once('open', () => {
 
 let productSchema = new mongoose.Schema({
   productName: String,
+  sizing: String,
   brand: String,
   price: Number,
   blurbUnderPrice: String,
@@ -41,16 +42,17 @@ let hundredRecords = () => {
   let array = [];
   let count = 0
   // let randomizer = Math.random()
-  while (array.length < 10) {
+  while (array.length < 100) {
     let rec = product()
     let x = (Math.random())
     if (count % 2 == 0) {
       let org = rec.moreBrand;
       rec.moreBrand = org + '; imported'
       rec.department = 'Men\'s shoes'
+      rec.sizing = "Whole sizes only; for 1/2 sizes, order next size down.";
     } else{
-      //let org = rec.moreBrand;
       rec.department = `Women's shoes`
+      rec.sizing = "True to size";
     }
     rec.itemNumber = count
     array.push(rec)
@@ -94,15 +96,36 @@ let readAll = (cb) => {
     if (err) {
       throw '!!!!!!!!!', err;
     } else {
-      console.log(res);
+      //console.log(res);
       cb(null, res);
     }
   })
 }
 
+let alterPriya = (cb) => {
+  Record.find((err, res) => {
+    if (err) {
+      throw err;
+    } else {
+      for (let i=0; i<res.length; i++){
+        res[i]["sizing"] = undefined
+        res[i]["sizing"] = undefined
+        res[i]["blurbUnderPrice"] = undefined
+        res[i]["moreBrand"] = undefined
+        res[i]["department"] = undefined
+        res[i]["itemNumber"] = undefined
+      }
+      cb(null, res)
+    }
+  })
+}
+
+
+
 module.exports = {
   readAll,
-  findSpecific
+  findSpecific,
+  alterPriya
 }
 
 

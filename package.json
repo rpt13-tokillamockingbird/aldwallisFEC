@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "description": "Front End Capstone project",
   "main": "index.js",
+  "jest": {
+    "setupFilesAfterEnv": ["./configJest.js"],
+    "verbose": true,
+    "transform": {
+        "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!<MODULE_NAME>).+\\.js$",
+      "/client/src/.*.jsx$"
+    ]
+  },
   "scripts": {
     "test": "jest ",
     "seed": "node server/db/fakerDB.js",
@@ -24,10 +35,16 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.0-beta.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.1",
+    "enzyme-to-json": "^3.3.5",
     "jest": "^24.8.0",
     "nodemon": "^1.19.0",
+    "react-test-renderer": "^16.8.6",
     "webpack": "^2.2.1",
     "webpack-cli": "^3.3.2"
   }
