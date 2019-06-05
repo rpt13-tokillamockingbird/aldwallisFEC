@@ -4,10 +4,12 @@
   "description": "Front End Capstone project",
   "main": "index.js",
   "jest": {
-    "setupFilesAfterEnv": ["./configJest.js"],
+    "setupFilesAfterEnv": [
+      "./configJest.js"
+    ],
     "verbose": true,
     "transform": {
-        "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
       "/node_modules/(?!<MODULE_NAME>).+\\.js$",

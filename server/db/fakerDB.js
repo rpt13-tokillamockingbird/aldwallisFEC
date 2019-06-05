@@ -1,7 +1,7 @@
 const faker = require('faker');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/FEC', {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/FEC', { useNewUrlParser: true })
 
 const db = mongoose.connection;
 
@@ -11,9 +11,13 @@ db.once('open', () => {
 
 let productSchema = new mongoose.Schema({
   productName: String,
+  productSubTitle: String,
   sizing: String,
   brand: String,
-  price: Number,
+  price: mongoose.Decimal128,
+  discountPrice: mongoose.Decimal128,
+  discountPercent: Number,
+  productSingleLineDescription: String,
   blurbUnderPrice: String,
   materials: String,
   moreBrand: String,
@@ -23,34 +27,51 @@ let productSchema = new mongoose.Schema({
 
 let count = 0
 
-let product = () => {
+let product = (i) => {
   let productName = `${faker.commerce.color()} ${faker.name.firstName()}`
+  let productSubTitle = `${faker.lorem.sentence()}`
   let brand = `${faker.name.firstName()} ${faker.name.lastName()}`
   let price = faker.commerce.price();
+  let discountPercent;
+  let discountPrice;
+  if (i >= 15 && i <= 30) {
+    discountPercent = Math.floor(Math.random() * (Math.floor(33) - Math.ceil(10) + 1)) + 10;
+    discountPrice = (price - (price * (discountPercent / 100))).toFixed(2);
+    console.log(discountPercent);
+    console.log(discountPrice);
+    console.log(price);
+  } else {
+    discountPercent = 0;
+    discountPrice = 0;
+  }
+
   let blurbUnderPrice = `${faker.commerce.productAdjective()} ${faker.lorem.sentence()}`
+  let productSingleLineDescription = `${faker.lorem.sentences()}`
   //Details & Care
-    let materials = faker.commerce.productMaterial()
-    let moreBrand = `By ${brand}` //could do a math rand to flip between imported and domestic.
-    let department = `____ Shoes.` //again do math rand to pick between men and women.
-    //let itemNumber = `Item #${faker.random.number()}` //Or do whatever current id we are at in db?
-    let itemNumber = 0
-  return {productName, brand, price, blurbUnderPrice, materials, moreBrand, department, itemNumber}
+  let materials = faker.commerce.productMaterial()
+  let moreBrand = `By ${brand}` //could do a math rand to flip between imported and domestic.
+  let department = `____ Shoes.` //again do math rand to pick between men and women.
+  //let itemNumber = `Item #${faker.random.number()}` //Or do whatever current id we are at in db?
+  let itemNumber = 0
+  return { productName, productSubTitle, brand, price, discountPercent, discountPrice, blurbUnderPrice, materials, moreBrand, department, productSingleLineDescription, itemNumber }
 }
 
 
 let hundredRecords = () => {
   let array = [];
-  let count = 0
+  let count = 5000;
+  let i = 0;
   // let randomizer = Math.random()
   while (array.length < 100) {
-    let rec = product()
+    i++;
+    let rec = product(i);
     let x = (Math.random())
     if (count % 2 == 0) {
       let org = rec.moreBrand;
       rec.moreBrand = org + '; imported'
       rec.department = 'Men\'s shoes'
       rec.sizing = "Whole sizes only; for 1/2 sizes, order next size down.";
-    } else{
+    } else {
       rec.department = `Women's shoes`
       rec.sizing = "True to size";
     }
@@ -107,7 +128,7 @@ let alterPriya = (cb) => {
     if (err) {
       throw err;
     } else {
-      for (let i=0; i<res.length; i++){
+      for (let i = 0; i < res.length; i++) {
         res[i]["sizing"] = undefined
         res[i]["sizing"] = undefined
         res[i]["blurbUnderPrice"] = undefined
