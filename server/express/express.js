@@ -12,7 +12,7 @@ let port = process.env.PORT || 4554;
 //app.use(express.static(path.resolve('client', 'dist')));
 
 //This makes any endpoint ending w/ 'hundred/id' into a react page.
-app.use('/hundred/:id', express.static(path.resolve('client', 'dist')))
+app.use('/productBuyerInfo/:id', express.static(path.resolve('client', 'dist')))
 
 
 app.get('/hundred', (req, result) => {
@@ -26,7 +26,7 @@ app.get('/hundred', (req, result) => {
   })
 })
 
-app.get('/hundred/:id', (req, results) => {
+app.get('/productBuyerInfo/:id', (req, results) => {
   let id = req.params.id
   fakerDB.readAll((err, res) => {
     if (err) {

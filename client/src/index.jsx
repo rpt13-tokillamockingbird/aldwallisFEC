@@ -20,7 +20,7 @@ const SurroundingPadding = styled.div`
 `
 
 export default class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       record: {}
@@ -28,23 +28,23 @@ export default class App extends React.Component {
     this.f = this.f.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.f()
   }
 
-  f(){
-   let x = (window.location.pathname).split('/')[2]
+  f() {
+    let x = (window.location.pathname).split('/')[2]
     fetch(`/hundred`)
-    .then(d => d.json())
-    .then(d => {
-      for (let i=0; i<d.length; i++) {
-        if (Number(d[i].itemNumber) === Number(x)){
-          this.setState({
-            record: d[i]
-          })
+      .then(d => d.json())
+      .then(d => {
+        for (let i = 0; i < d.length; i++) {
+          if (Number(d[i].itemNumber) === Number(x)) {
+            this.setState({
+              record: d[i]
+            })
+          }
         }
-      }
-    })
+      })
   }
 
   render() {
@@ -52,11 +52,11 @@ export default class App extends React.Component {
       <SurroundingPadding>
         <SandDPadding>
           <SizeInfo size={this.state.record.sizing} />
-          <Details data={this.state.record}/>
+          <Details data={this.state.record} />
         </SandDPadding>
       </SurroundingPadding>
     )
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('ProductDescription'));
