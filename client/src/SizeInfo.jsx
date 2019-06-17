@@ -1,5 +1,5 @@
 import React from 'react'
-import styled  from 'styled-components';
+import styled from 'styled-components';
 
 const BulletPoints = styled.li`
   font-size: 13px;
@@ -30,13 +30,13 @@ const UL = styled.ul`
   margin-right: 18px;
 `;
 
-class SizeInfo extends React.Component{
-  constructor(props){
+class SizeInfo extends React.Component {
+  constructor(props) {
     super(props)
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
         <Header>Size Info</Header>
         <UL>

@@ -33,10 +33,12 @@ export default class App extends React.Component {
   }
 
   f() {
-    let x = (window.location.pathname).split('/')[2]
-    fetch(`/hundred`)
+    let x = (window.location.pathname).split('/')[1];
+    fetch(`/hundred${window.location.pathname}`)
       .then(d => d.json())
       .then(d => {
+
+        debugger;
         for (let i = 0; i < d.length; i++) {
           if (Number(d[i].itemNumber) === Number(x)) {
             this.setState({

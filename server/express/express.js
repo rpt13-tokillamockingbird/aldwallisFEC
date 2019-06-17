@@ -3,30 +3,37 @@ const fakerDB = require('../db/getProductInfoDB');
 const bodyParser = require('body-parser');
 const path = require('path');
 const Promise = require('bluebird');
+var cors = require('cors');
+
+
 
 const app = express();
 let port = process.env.PORT || 4554;
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
+app.use(cors());
 
 //Gets static files from client/dist
 //app.use(express.static(path.resolve('client', 'dist')));
 
 //This makes any endpoint ending w/ 'hundred/id' into a react page.
-app.use('/productBuyerInfo/:id', express.static(path.resolve('client', 'dist')))
+app.use('/:id', express.static(path.resolve('client', 'dist')))
 
 
-app.get('/hundred', (req, result) => {
+app.get('/hundred/:id', (req, result) => {
   fakerDB.readAll((err, res) => {
     if (err) {
       throw err;
     } else {
-      let stringify = JSON.stringify(res)
+      let stringify = JSON.stringify(res);
       result.send(stringify)
     }
   })
 })
 
-app.get('/productBuyerInfo/:id', (req, results) => {
+app.get('/product/:id', (req, results) => {
   let id = req.params.id
   fakerDB.readAll((err, res) => {
     if (err) {
