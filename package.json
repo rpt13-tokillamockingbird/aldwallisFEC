@@ -19,7 +19,7 @@
   "scripts": {
     "test": "jest ",
     "seed": "node server/db/fakerDB.js",
-    "server": "nodemon server/express/express.js",
+    "server": "node server/express/express.js",
     "reactDev": "webpack -d --watch"
   },
   "author": "",
